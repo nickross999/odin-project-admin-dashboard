@@ -1,7 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+:root {
+    --blue: #1992D4;
+    --gray: #E2E8F0;
+    --orange: #F0B429;
+}
+
 body { 
     margin: 0;
     padding: 0;
-    font-family: 'Courier New', Courier, monospace;
+    font-family: 'Roboto', 'Courier New', Courier, monospace;
 }
 
 
@@ -16,12 +24,94 @@ body {
 }
 
 .header {
+    z-index: 1;
     background-color: white;
+    box-shadow: 2px 2px 5px gray;
     grid-area: header;
+    display: grid;
+    grid-template: 1fr 2fr / repeat(3, 1fr);
+    grid-template-areas: 
+        "search search profile"
+        "greeting greeting functions";
+    padding-left: 20px;
+}
+
+.header div {
+    display: flex;
+    align-items: center;
+}
+
+.search-div {
+    grid-area: search;
+}
+
+.search-bar {
+    width: 100%;
+    border-radius: 15px;
+    background-color: var(--gray);
+    border: none;
+    height: 30px;
+    padding: 0 10px 0 10px;
+}
+
+.profile-div {
+    grid-area: profile;
+    justify-content: space-evenly;
+}
+
+.profile-picture {
+    max-height: 50px;
+}
+
+.profile-name {
+    font-size: 1.25rem;
+    font-weight: bold;
+}
+
+.greeting-div {
+    grid-area: greeting;
+}
+
+.greeting {
+    flex-direction: column;
+    margin-left: 10px;
+    align-items: flex-start;
+    font-weight: bold;
+}
+
+.greeting span {
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.greeting h2 {
+    margin: 0;
+}
+
+.functions-div {
+    grid-area: functions;
+    justify-content: space-evenly;
+}
+
+.function-btn {
+    width: max(75px, 10vw);
+    max-width: 150px;
+    height: 40px;
+    margin: 0 10px 0 10px;
+    border-radius: 15px;
+    border: none;
+    background-color: var(--blue);
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.function-btn:active {
+    background-color: var(--orange);
 }
 
 .sidebar {
-    background-color: blue;
+    background-color: var(--blue);
     grid-area: sidebar;
     display: flex;
     flex-direction: column;
@@ -32,6 +122,10 @@ body {
     font-size: 2rem;
     padding: 15px 0 40px 1rem;
     flex-grow: 1;
+}
+
+.logo-div span {
+    padding-bottom: 12px;
 }
 
 .logo-img {
@@ -68,6 +162,148 @@ li:not(:last-of-type) {
 
 
 .dashboard {
-    background-color: gray;
+    background-color: var(--gray);
     grid-area: dashboard;
+    display: grid;
+    grid-template: repeat(6, 1fr) / repeat(5, 1fr);
+    grid-template-areas: 
+        "projects projects projects announcements announcements"
+        "projects projects projects announcements announcements"
+        "projects projects projects announcements announcements"
+        "projects projects projects trending trending"
+        "projects projects projects trending trending"
+        "projects projects projects trending trending";
+}
+
+.projects-div {
+    grid-area: projects;
+    padding: 20px 0 0 20px;
+    display: grid;
+    grid-template: .5fr 9fr/ 1fr;
+    grid-template-areas:
+        "title"
+        "cards";
+}
+
+.cards {
+    grid-area: cards;
+    margin-bottom: 100px;
+    display: grid;
+    grid-template: repeat(auto-fit, minmax(200px, 1fr)) / repeat(2, 1fr);
+    gap: 40px;
+}
+
+.title {
+    grid-area: title;
+}
+
+.card, .announcements-hub, .trending-hub {
+    border-radius: 10px;
+    box-shadow: 2px 2px 5px gray;
+    background-color: white;
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    border-left: var(--orange) 10px solid;
+    padding: 15px 10px 0 20px;
+    overflow: scroll;
+}
+
+.card-title {
+    margin-bottom: 5px;
+    flex-grow: 0;
+}
+
+.card-description {
+    margin: 0;
+    color: gray;
+    flex-grow: 0;
+}
+
+.card-footer {
+    flex-grow: 1;
+    display: flex;
+    justify-content: right;
+    align-items: flex-end;
+    padding-bottom: 20px;
+}
+
+.card-footer img {
+    margin-left: 10px;
+}
+
+.announcements-div {
+    grid-area: announcements;
+    padding: 20px 20px 0 20px;
+    display: grid;
+    grid-template: .5fr 6fr / 1fr;
+    grid-template-areas: 
+        "title"
+        "hub";
+}
+
+.announcements-hub {
+    grid-area: hub;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.announcement {
+    padding-bottom: 30px;
+
+}
+
+.announcement:not(:last-of-type) {
+    border-bottom: 1px solid lightgray;
+}
+
+.announcement-description, .announcement-title {
+    margin: 0;
+}
+
+.announcement-description {
+    color: gray;
+    height: 5em;
+    overflow: scroll;
+    padding-top: 5px;
+}
+
+.trending-div {
+    grid-area: trending;
+    padding: 20px 20px 0 20px;
+    margin-bottom: 100px;
+    display: grid;
+    grid-template: .5fr 5fr / 1fr;
+    grid-template-areas: 
+        "title"
+        "hub";
+}
+
+.trending-hub {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    grid-area: hub;
+    padding: 0px 20px 0 20px;
+}
+
+.trending-profile {
+    display: flex;
+    align-items: center;
+}
+
+.profile-info {
+    margin-left: 20px;
+}
+
+.profile-handle, .profile-title {
+    margin: 0;
+}
+
+.profile-title {
+    color: gray;
 }
